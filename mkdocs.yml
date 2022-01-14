@@ -1,0 +1,7 @@
+site_name: Qlue
+theme:
+  name: material
+  palette:
+    scheme: default
+    primary: red
+    accent: deep purple

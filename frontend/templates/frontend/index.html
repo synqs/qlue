@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block content %}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col">
+      <h1 >Welcome to QSIMSIM</h1>
+      QSIMSIM is an ensemble of quantum hardware simulators. It enables simple access to simulators of our
+      machines at SYNQS. After you created yourself an account you can access the devices through pennylane or
+      qiskit.
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <h2>User credentials</h2>
+      {% if user.is_authenticated %}
+      <p>To access the simulator, you will need to use the credentials from this website: <code> username='{{user.username}}' token='YOUR-PASSWORD'</code></p>
+
+
+      {% else %}
+      <p>Before you can get started, you first have to sign up. Get started with the sign up below.</p>
+      <a role="button" href = "{% url 'signup' %}" class="btn btn-primary btn-lg">Sign up.</a>
+      {% endif %}
+    </div>
+    <div class="row justify-content-center">
+
+    <h2>Available hardware simulators</h2>
+    <p>
+    In this first development stage, we currently have three devices online for first tests
+    </p>
+    {% for backend in backend_list %}
+
+    <div class="col-4">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title">{{backend.name}} simulator</h3>
+          <p class="card-text">{{backend.description}}. It is accessible under the URL
+          <code>https://qsimsim.synqs.org/api/{{backend.name}}/</code></p>
+          <h4> Qiskit users</h4>
+          Before you can get started, please execute the following line of code, which saves your credentials:<br>
+          <code>provider = ColdAtomProvider.save_account(url = ["http://qsimsim.synqs.org/api/{{backend.name}}"], username="your_username",token="your_password")</code><br>
+          <h4> Pennylane users</h4>
+          Please follow the instructions <a href="https://github.com/synqs/pennylane-ls" target="_blank" rel="noopener noreferrer">here</a>.
+        </div>
+      </div>
+    </div>
+
+    {% endfor %}
+    </div>
+    <div class="row justify-content-center">
+
+    <h2>Tutorials</h2>
+    <p>
+    We have put together a number of tutorials that should allow you to get started:
+    </p>
+      <h3>QISKIT</h3>
+      <ul>
+        <li>      <a href="https://github.com/Qiskit-Extensions/qiskit-cold-atom/blob/main/docs/tutorials/07_squeezing_in_qudits.ipynb" target="_blank" rel="noopener noreferrer">Squeezing on a single qudit</a></li>
+        <li>      <a href="https://github.com/Qiskit-Extensions/qiskit-cold-atom/blob/main/docs/tutorials/03_fermionic_tweezer_hardware.ipynb" target="_blank" rel="noopener noreferrer">Interacting fermions in a tweezer</a></li>
+      </ul>
+
+      <h3>Pennylane</h3>
+      <ul>
+        <li>      <a href="https://github.com/synqs/pennylane-ls/blob/master/examples/Fisher_information.ipynb" target="_blank" rel="noopener noreferrer">Squeezing on a single qudit</a></li>
+        <li>      <a <a href="https://github.com/synqs/pennylane-ls/blob/master/examples/Fermions_in_double_well.ipynb" target="_blank" rel="noopener noreferrer">Interacting fermions in a tweezer</a></li>
+        <li>      <a href="https://github.com/synqs/pennylane-ls/blob/master/examples/Gauge_Theory.ipynb" target="_blank" rel="noopener noreferrer">Gauge theory with multiple qudits</a></li>
+      </ul>
+    </div>
+</div>
+
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block content %}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col">
+      <h1 >Welcome to the signup</h1>
+      QSIMSIM is an ensemble of quantum hardware simulators. On this site, you can sign up to obtain the necessary credentials for access to the simulators.
+    </div>
+  </div>
+  <div class="row justify-content-center">
+
+    <h1 >Your user information</h1>
+    <form method="post" action="{% url 'signup' %}">
+      {% csrf_token %}
+      <table>
+        {{ form.as_table }}
+      </table>
+
+      <input type="submit" value="Register !">
+    </form>
+  </div>
+</div>
+{% endblock %}
