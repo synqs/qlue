@@ -1,5 +1,5 @@
 # qlue
-An API to make quantum circuits accessible for cold atom backends
+An API to make quantum circuits accessible for cold atom backends.
 
 ## Documentation:
 * Click [here](https://synqs.github.io/qlue/) for the latest formatted release of the document.
