@@ -205,8 +205,8 @@ class BackendConfigTest(TestCase):
     fixtures = ["backend.json"]
 
     def setUp(self):
-        self.username = config("TEST_USERNAME")
-        self.password = config("TEST_PASSWORD")
+        self.username = config("USERNAME_TEST")
+        self.password = config("PASSWORD_TEST")
         user = User.objects.create(username=self.username)
         user.set_password(self.password)
         user.save()
@@ -307,8 +307,8 @@ class JobSubmissionTest(TestCase):
     fixtures = ["backend.json"]
 
     def setUp(self):
-        self.username = config("TEST_USERNAME")
-        self.password = config("TEST_PASSWORD")
+        self.username = config("USERNAME_TEST")
+        self.password = config("PASSWORD_TEST")
         user = User.objects.create(username=self.username)
         user.set_password(self.password)
         user.save()
