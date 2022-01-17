@@ -13,8 +13,8 @@ jobs:
       APP_KEY: ${{secrets.APP_KEY}}
       REFRESH_TOKEN: ${{secrets.REFRESH_TOKEN}}
       SECRET_KEY: ${{secrets.SECRET_KEY}}
-      USERNAME_HEROKU: ${{secrets.USERNAME_HEROKU}}
-      PASSWORD_HEROKU: ${{secrets.PASSWORD_HEROKU}}
+      USERNAME_TEST: ${{secrets.USERNAME_TEST}}
+      PASSWORD_TEST: ${{secrets.PASSWORD_TEST}}
     runs-on: ubuntu-latest
     strategy:
       max-parallel: 4
