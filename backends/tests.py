@@ -205,8 +205,8 @@ class BackendConfigTest(TestCase):
     fixtures = ["backend.json"]
 
     def setUp(self):
-        self.username = config("USERNAME_HEROKU")
-        self.password = config("PASSWORD_HEROKU")
+        self.username = 'john'
+        self.password = 'dog'
         user = User.objects.create(username=self.username)
         user.set_password(self.password)
         user.save()
@@ -231,11 +231,11 @@ class BackendConfigTest(TestCase):
         )
         data = json.loads(req.content)
         self.assertEqual(req.status_code, 200)
-
         self.assertCountEqual(data["basis_gates"], ["fhop", "fint", "fphase"])
         self.assertEqual(data["backend_name"], "synqs_fermions_simulator")
         self.assertEqual(data["display_name"], "fermions")
         self.assertEqual(data["url"], "https://coquma-sim.herokuapp.com/api/fermions/")
+        self.assertEqual(data["n_qubits"], 8)
 
         gates = data["gates"]
         for gate in gates:
@@ -307,8 +307,8 @@ class JobSubmissionTest(TestCase):
     fixtures = ["backend.json"]
 
     def setUp(self):
-        self.username = config("USERNAME_HEROKU")
-        self.password = config("PASSWORD_HEROKU")
+        self.username = 'john'
+        self.password = 'dog'
         user = User.objects.create(username=self.username)
         user.set_password(self.password)
         user.save()
