@@ -195,6 +195,7 @@ class BackendCreationTest(TestCase):
         multiqudit_backend = Backend.objects.create(**payload)
         self.assertTrue(multiqudit_backend.simulator, True)
         self.assertEqual(multiqudit_backend.num_wires, 4)
+        self.assertEqual(multiqudit_backend.max_experiments, 1000)
 
 
 class BackendConfigTest(TestCase):
@@ -284,6 +285,7 @@ class BackendConfigTest(TestCase):
         self.assertEqual(
             data["url"], "https://coquma-sim.herokuapp.com/api/multiqudit/"
         )
+        self.assertEqual(data["max_experiments"], 1000)
         self.assertEqual(req.status_code, 200)
         gates = data["gates"]
 
