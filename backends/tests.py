@@ -237,7 +237,7 @@ class BackendConfigTest(TestCase):
         self.assertEqual(data["display_name"], "fermions")
         self.assertEqual(data["url"], "https://coquma-sim.herokuapp.com/api/fermions/")
         self.assertEqual(data["n_qubits"], 8)
-
+        self.assertEqual(data["num_species"], 2)
         gates = data["gates"]
         for gate in gates:
             if gate["name"] == "fhop":
