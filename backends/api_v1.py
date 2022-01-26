@@ -9,8 +9,9 @@ from .models import Backend
 
 api = NinjaAPI(version="1.0.0")
 
-@api.get("{backend_name}/get_config", response = BackendSchemaOut, tags=["Backend"])
-def get_config(request, backend_name:str):
+
+@api.get("{backend_name}/get_config", response=BackendSchemaOut, tags=["Backend"])
+def get_config(request, backend_name: str):
     """
     Returns the list of backends.
     """
@@ -46,9 +47,7 @@ def get_config(request, backend_name:str):
         config_dict["basis_gates"].append(gate["name"])
 
     # it would be really good to remove the first part and replace it by the domain
-    config_dict["url"] = (
-        "https://coquma-sim.herokuapp.com/api/" + backend.name + "/"
-    )
+    config_dict["url"] = "https://coquma-sim.herokuapp.com/api/" + backend.name + "/"
     return config_dict
 
 
