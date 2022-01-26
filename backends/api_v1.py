@@ -7,9 +7,9 @@ from ninja import NinjaAPI
 from .schemas import BackendSchemaOut
 from .models import Backend
 
-api = NinjaAPI()
+api = NinjaAPI(version="1.0.0")
 
-@api.get("{backend_name}/get_config", response = BackendSchemaOut)
+@api.get("{backend_name}/get_config", response = BackendSchemaOut, tags=["Backend"])
 def get_config(request, backend_name:str):
     """
     Returns the list of backends.
@@ -52,7 +52,7 @@ def get_config(request, backend_name:str):
     return config_dict
 
 
-@api.get("/backends", response=List[BackendSchemaOut])
+@api.get("/backends", response=List[BackendSchemaOut], tags=["Backend"])
 def list_backends(request):
     """
     Returns the list of backends.
