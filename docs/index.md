@@ -1,6 +1,6 @@
 # Welcome to Qlue
 
-For signup visit [synqs.org](https://qsimsim.synqs.org/).
+For signup visit [qsimsim.synqs.org](https://qsimsim.synqs.org/).
 
 # Qlue : a web framework for quantum computing backends
 --------
