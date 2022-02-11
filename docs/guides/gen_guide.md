@@ -8,7 +8,7 @@ We want to use our quantum computing backends as platforms for executing experim
 The above issues can also exist for a simulator package. Hence the need for [this project][coquma_sim_github]. There are two sides : [client](#the-client) and [server](#the-server).
 
 ## The client
-A client is a remote user who will write quantum circuits in the user's favorite quantum circuit framework ([Qiskit][Qiskit_github]/[Pennylane][Pennylane_github]/something_else). These circuits then have to be compiled into JSON files. The JSON files can be sent over the internet to a remote server which will queue it for parsing/execution on the backend. The backend can be a real cold atom machine or a simulator running on a computer. To get credentials, user has to create an account at [synqs.org](https://qsimsim.synqs.org/).
+A client is a remote user who will write quantum circuits in the user's favorite quantum circuit framework ([Qiskit][Qiskit_github]/[Pennylane][Pennylane_github]/something_else). These circuits then have to be compiled into JSON files. The JSON files can be sent over the internet to a remote server which will queue it for parsing/execution on the backend. The backend can be a real cold atom machine or a simulator running on a computer. To get credentials, user has to create an account at [qsimsim..synqs.org](https://qsimsim.synqs.org/).
 
 We have decided on a schema for the JSON files. See [1][eggerdj_github]  for more details. The document mentions in detail how things should be formatted.
 
