@@ -63,7 +63,6 @@ We use Dropbox to store all our JSONS. This approach has several benefits:
 * We immediately implement asynchronous job management. Basically the Heroku server dumps the job coming from the remote client onto Dropbox. Then whenever the Spooler belonging to a backend is free, it will query to ``get_next_job_in_queue`` view and act on the next job which is appropriate for that particular backend.
 * Dropbox also serves as a database storage for various JSONs, like job_JSON, result_JSON, status_JSON etc. It gives us 2 GB free storage which is a lot considering price of commercial database alternatives.
 * It allows us to unify the workflow for both simulator and real machine. Basically it does not matter what the backend is, the workflow is the identical. Different backends only differ in their Spoolers.
-* For the accessing experiment backend the remote user no longer needs the extra hassle of an SSH connection.
 
 Now we describe how the Dropbox folder structure is organized. It is shown in following picture:
 ![](dropbox.png)
@@ -128,6 +127,8 @@ There are some important points to note here:
 
 * The maintainer.py is a python program. It might very well crash and then our simulator is no longer executing circuits. Although the server is still fine and storing jobs properly but the jobs will be in waiting queue as long as the Spooler is dead. As a quick fix to this problem, we do not run the maintainer.py file directly. Instead we have a bash script ``keep_running.sh`` which runs the maintainer.py in a loop. If python file crashes the bash script will automatically restart it. This is a temporary fix for now and will be replaced by a more professional solution using ``cron`` or ``supervisord`` in near future.
 * The spooler is a virtual machine (VM) living in the cloud. We need a professional way to deploy the code on the VM. This support also will be included in near future where whenever a developer makes a push to the Spooler github repository ``coquma-sim-spooler``, the new files are automatically copied and deployed to the VM.
+
+All code for the spoolers is in a separate GitHub repository which we will make public later on.
 
 #### The experiment backend
 A first draft for implementing the experiment backends is highlighted [here][labscript_qc].
