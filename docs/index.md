@@ -6,7 +6,7 @@ For signup visit [qsimsim.synqs.org](https://qsimsim.synqs.org/).
 --------
 * [General description](guides/gen_guide.md) : Details of the infrastructure.
 * [User Guide](guides/user_guide.md) : For users who want to use our service.
-* [Developer Guide](guides/dev_guide.md) : For developers who want to implement this on their own for their research.
+* [Developer Guide](guides/dev_guide.md) : For people who want to implement this on their own for their research.
 
 
 ## Our projects:

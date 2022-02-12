@@ -5,10 +5,10 @@ We want to use our quantum computing backends as platforms for executing experim
 * Labscript suite does not have native support for writing quantum circuits.
 * We want to allow remote users to be able to submit jobs to our backends. So we need a server architecture and user management.
 
-The above issues can also exist for a simulator package. Hence the need for [this project][coquma_sim_github]. There are two sides : [client](#the-client) and [server](#the-server).
+The above issues can also exist for a simulator package. Hence the need for [this project][qlue_github]. There are two sides : [client](#the-client) and [server](#the-server).
 
 ## The client
-A client is a remote user who will write quantum circuits in the user's favorite quantum circuit framework ([Qiskit][Qiskit_github]/[Pennylane][Pennylane_github]/something_else). These circuits then have to be compiled into JSON files. The JSON files can be sent over the internet to a remote server which will queue it for parsing/execution on the backend. The backend can be a real cold atom machine or a simulator running on a computer. To get credentials, user has to create an account at [qsimsim..synqs.org](https://qsimsim.synqs.org/).
+A client is a remote user who will write quantum circuits in the user's favorite quantum circuit framework ([Qiskit][Qiskit_github]/[Pennylane][Pennylane_github]/something_else). These circuits then have to be compiled into JSON files. The JSON files can be sent over the internet to a remote server which will queue it for parsing/execution on the backend. The backend can be a real cold atom machine or a simulator running on a computer. To get credentials, user has to create an account at [qsimsim.synqs.org](https://qsimsim.synqs.org/).
 
 We have decided on a schema for the JSON files. See [1][eggerdj_github]  for more details. The document mentions in detail how things should be formatted.
 
@@ -133,7 +133,7 @@ There are some important points to note here:
 A first draft for implementing the experiment backends is highlighted [here][labscript_qc].
 
 
-[coquma_sim_github]: https://github.com/synqs/coquma-sim/tree/modular_dropbox "coquma-sim"
+[qlue_github]: https://github.com/synqs/qlue "qlue"
 [Qiskit_github]: https://github.com/Qiskit "Qiskit"
 [Pennylane_github]: https://github.com/PennyLaneAI "Pennylane"
 [eggerdj_github]: https://github.com/eggerdj/backends/ "Qiskit_json"
