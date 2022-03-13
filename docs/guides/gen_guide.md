@@ -1,5 +1,20 @@
 # General description
 ## The big picture
+The idea for developing [qlue][qlue_github] stems from the desire for unifying experiment execution on different platforms for quantum simulation/computation. These platforms can be based on different technologies (e.g. neutral atoms, ions, superconducting qubits, photonic systems etc.) and have different software for experiment control.
+
+In this diversity there is a unifying feature for different experiments, they essentially act as a backends for executing some instructions. On adopting this picture we quickly realise that we become totally agnostic to the details of how the instructions are executed on a hardware if we can provide a general higher level description of the experiments. A very suitable high-level description for experiments on different platforms is to think of these experiments as quantum circuits. In this picture any experiment essentially has three steps : state preparation, unitary evolution under a given Hamiltonian and measurement. Infact we are not just limited to experiments anymore and can even include theoretical simulator backends which execute the quantum circuits on a computer.
+
+For providing software support for a given backend to use the language of quantum circuits, two types of libraries are required : one which allows to write quantum circuits for the experiments using some kind of quantum circuit framework and a second one for parsing the quantum circuits into a format which can be run on the experiment. For the first one, there already exists quantum circuit frameworks like QisKit , Pennylane etc. which provide a comprehensive support for writing quantum circuits. For the second one, custom code has to be written which will depend on the details of the particular backend.
+
+Another important point is that we assume that the user who writes the quantum circuits does not necessarily have local access to experiments. So the user submits quantum circuits to the backend remotely over the internet. We use the word job for the submissions by the remote user. Therefore, we also need a service which can act as the central point for various remote users to submit their jobs or fetch the result/status of their previously submitted jobs. For security reasons this service should provide robust user management and authentication.
+
+To address the issue we have developed a web interface called [qlue][qlue_github] which allows remote users to submit their jobs to remote cold atom backends. This architecture has several advantages :
+
+* The same circuit can be executed on different backends.
+* Makes collaboration between researchers easier.
+* A nice tool for teaching.
+
+## A use case
 We want to use our quantum computing backends as platforms for executing experiments written as quantum circuits. These backends can be a real cold atom machine or a simulator running on a computer . But how will the backend understand a quantum circuit? For e.g. in our experiment we use the [labscript suite][labscript_github] to control all hardware and for data analysis. We need to tackle the following issues:
 
 * Labscript suite does not have native support for writing quantum circuits.
@@ -131,7 +146,7 @@ There are some important points to note here:
 All code for the spoolers is in a separate GitHub repository which we will make public later on.
 
 #### The experiment backend
-A first draft for implementing the experiment backends is highlighted [here][labscript_qc].
+A first draft for implementing the experiment backends is highlighted [here][labscript_qc]. The code was tested to perform MOT loading in a cold atom machine in Heidelberg by submitting circuits from Zurich. Although we still need to polish this part of the code, it already highlights important ideas on how to connect a real cold atom machine to [qlue][qlue_github].
 
 
 [qlue_github]: https://github.com/synqs/qlue "qlue"
