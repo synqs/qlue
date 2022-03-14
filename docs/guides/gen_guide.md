@@ -2,7 +2,7 @@
 ## The big picture
 The idea for developing [qlue][qlue_github] stems from the desire for unifying experiment execution on different platforms for quantum simulation/computation. These platforms can be based on different technologies (e.g. neutral atoms, ions, superconducting qubits, photonic systems etc.) and have different software for experiment control.
 
-In this diversity there is a unifying feature for different experiments, they essentially act as a backends for executing some instructions. On adopting this picture we quickly realise that we become totally agnostic to the details of how the instructions are executed on a hardware if we can provide a general higher level description of the experiments. A very suitable high-level description for experiments on different platforms is to think of these experiments as quantum circuits. In this picture any experiment essentially has three steps : state preparation, unitary evolution under a given Hamiltonian and measurement. Infact we are not just limited to experiments anymore and can even include theoretical simulator backends which execute the quantum circuits on a computer.
+In this diversity there is a unifying feature for different experiments, they essentially act as a backend for executing some instructions. On adopting this picture we quickly realise that we become totally agnostic to the details of how the instructions are executed on a hardware if we can provide a general higher level description of the experiments. A very suitable high-level description for experiments on different platforms is to think of these experiments as quantum circuits. In this picture any experiment essentially has three steps : state preparation, unitary evolution under a given Hamiltonian and measurement. Infact we are not just limited to experiments anymore and can even include theoretical simulator backends which execute the quantum circuits on a computer.
 
 For providing software support for a given backend to use the language of quantum circuits, two types of libraries are required : one which allows to write quantum circuits for the experiments using some kind of quantum circuit framework and a second one for parsing the quantum circuits into a format which can be run on the experiment. For the first one, there already exists quantum circuit frameworks like [Qiskit][Qiskit_github], [Pennylane][Pennylane_github] etc. which provide a comprehensive support for writing quantum circuits. For the second one, custom code has to be written which will depend on the details of the particular backend.
 
@@ -27,13 +27,19 @@ A client is a remote user who will write quantum circuits in the user's favorite
 
 We have decided on a schema for the JSON files. See [1][eggerdj_github]  for more details. The document mentions in detail how things should be formatted.
 
-The plugin for compiling Qiskit circuits to JSON files is available at [1][eggerdj_github]. Similarly the plugin for compiling a pennylane circuit into JSON is available at [2][synqs_pennylane_github]. Note that the pennylane plugin at [2][synqs_pennylane_github] already offers several backends. Each backend is a device with its own operations.
+The plugin for compiling Qiskit circuits to JSON files is available at [``qiskit-cold-atom``](https://github.com/Qiskit-Extensions/qiskit-cold-atom). Similarly the plugin for compiling a pennylane circuit into JSON is available at [``pennylane-ls``][synqs_pennylane_github]. Note that the pennylane plugin at [``pennylane-ls``][synqs_pennylane_github] already offers several backends. Each backend is a device with its own operations.
 
 That's all that is required on the client side. Basically choose one of these frameworks. If the client wants to use a different quantum circuit framework, then the client must write appropriate code for compiling quantum circuits of that framework into JSON files which follow the schema of [1][eggerdj_github].
 
 ## The server
+Here we describe 3 parts:
+
+* The Django app (qlue).
+* The Dropbox storage.
+* The backends.
+
 ![](arch.png)
-### The Django app
+### The Django app (qlue)
 The [Heroku][Heroku] platform hosts our [Django][Django_github] app. Django is a Python-based free and open-source web framework. It uses the Model-View-Template architecture:
 
 * Model : Build databases from classes with the help of Object Relational Mapper (ORM).
@@ -134,7 +140,7 @@ The important file is the **maintainer.py**. It runs an endless while loop. Ever
 
 Lets consider the case where the server replied with a job name. The maintainer will download the contents of this job_JSON and also the status_JSON. Both the job dictionary and status dictionary are passed as an argument to the ``add_job `` function of the appropriate Spooler for that backend.
 
-The ``add_job `` function will perform sanity check on the JSON and execute the circuit. Then it will upload all results and status accordingly. The details on how exactly the circuits are executed will be described in future. If you are curious just look up the code.
+The ``add_job `` function will perform sanity check on the JSON and execute the circuit. Then it will upload all results and status accordingly. The details on how exactly the circuits are executed will be described in future.
 
 Also note that for reading writing to Dropbox on the Spooler PC too use Dropbox python API. The commands are in the file ``drpbx.py``
 
