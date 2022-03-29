@@ -1,2 +1,5 @@
 [MASTER]
 ignore=migrations
+
+[MESSAGES CONTROL]
+disable=R0801
