@@ -28,7 +28,7 @@ mkdocs==1.2.3
 mkdocs-material==8.1.6
 mkdocs-material-extensions==1.0.3
 mypy-extensions==0.4.3
-numpy==1.21.0
+numpy==1.22.0
 packaging==21.3
 pathspec==0.8.1
 platformdirs==2.4.1
