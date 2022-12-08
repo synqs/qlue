@@ -1,7 +1,7 @@
 appdirs==1.4.4
 attrs==21.1.0
 black==21.5b0
-certifi==2020.12.5
+certifi==2022.12.7
 click==7.1.2
 dj-database-url==0.5.0
 Django==4.0.2
